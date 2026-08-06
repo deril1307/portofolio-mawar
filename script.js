@@ -70,26 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const filterValue = btn.getAttribute('data-filter');
 
-            expCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                
-                if (filterValue === 'all' || category === filterValue) {
-                    card.style.display = 'flex';
-                    // Allow display block to apply before animating opacity
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    // Wait for transition to finish before hiding
-                    setTimeout(() => {
-                        if (!card.style.opacity || card.style.opacity === '0') {
-                            card.style.display = 'none';
-                        }
-                    }, 300);
-                }
+            // Using requestAnimationFrame to ensure smooth DOM updates
+            requestAnimationFrame(() => {
+                expCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
     });

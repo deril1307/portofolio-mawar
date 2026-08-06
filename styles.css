@@ -475,18 +475,14 @@ ul {
 }
 
 .exp-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-soft);
     border-radius: 16px;
     padding: 25px;
-    transition: var(--transition);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
-    /* initial state for animation */
-    transform: scale(1);
-    opacity: 1;
 }
 
 .exp-card:hover {
