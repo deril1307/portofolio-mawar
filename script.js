@@ -57,7 +57,44 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeObserver.observe(el);
     });
 
-    // 5. Contact Form Submission (Simulated)
+    // 5. Experience Filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const expCards = document.querySelectorAll('.exp-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            expCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                if (filterValue === 'all' || category === filterValue) {
+                    card.style.display = 'flex';
+                    // Allow display block to apply before animating opacity
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    // Wait for transition to finish before hiding
+                    setTimeout(() => {
+                        if (!card.style.opacity || card.style.opacity === '0') {
+                            card.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            });
+        });
+    });
+
+    // 6. Contact Form Submission (Simulated)
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
